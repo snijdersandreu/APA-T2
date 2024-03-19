@@ -37,7 +37,7 @@ def esPrimo(numero):
 
 def primos(numero):
     """Devuelve una tupla con todos los números primos menores que su argumento."""
-    return tuple(numero for numero in range(2, numero) if esPrimo(numero))
+    return tuple(n for n in range(2, numero) if esPrimo(numero))
 
 def descompon(numero):
     """Devuelve una tupla con la descomposición en factores primos de su argumento."""
@@ -74,15 +74,12 @@ def mcm(numero1, numero2):
 def mcdN(*numeros):
     """Devuelve el máximo común divisor para un número arbitrario de argumentos."""
     if not numeros:
-        return "introduce al menos un argumento"
-    numeros = tuple(set(numeros)) # elimino duplicados
-    factores = {numero: descompon(numero) for numero in numeros}
-    factores_comun = set(factores[numeros[0]])
-    for i in range(1, len(numeros)):
-        factores_comun &= set(factores[numeros[i]])    
-    mcd = 1    
+        return "Introduce al menos un argumento"
+    factores = [set(descompon(numero)) for numero in numeros]   # lista de tuplas
+    factores_comun = set.intersection(*factores)  # el asterisco hace que la funcion reciba factores como diferentes argumentos (tuplas)
+    mcd = 1
     for factor in factores_comun:
-        mcd *= factor ** min(factores[numero].count(factor) for numero in numeros)
+        mcd *= factor ** min(f.count(factor) for f in factores)
     return mcd
 
 def mcmN(*numeros):

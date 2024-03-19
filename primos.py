@@ -76,7 +76,7 @@ def mcdN(*numeros):
     if not numeros:
         return "Introduce al menos un argumento"
     factores = [set(descompon(numero)) for numero in numeros]   # lista de tuplas
-    factores_comun = set.intersection(*factores)  # el asterisco hace que la funcion reciba factores como diferentes argumentos (tuplas)
+    factores_comun = set.intersection(*factores)  # el asterisco hace que la funcion reciba la lista factores como diferentes argumentos (tuplas)
     mcd = 1
     for factor in factores_comun:
         mcd *= factor ** min(f.count(factor) for f in factores)

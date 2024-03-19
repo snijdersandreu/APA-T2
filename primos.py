@@ -54,7 +54,7 @@ def descompon(numero):
     return tuple(factores)
 
 def mcd(numero1, numero2):
-    """Devuelve el número máximo común divisor"""
+    """Devuelve el número máximo común divisor de los 2 argumentos."""
     factores1, factores2 = descompon(numero1), descompon(numero2)
     factores_comunes = set(factores1) & set(factores2)
     mcd = 1
@@ -63,7 +63,7 @@ def mcd(numero1, numero2):
     return mcd
 
 def mcm(numero1, numero2):
-    """Devuelve el número mínimo común múltiplo."""
+    """Devuelve el número mínimo común múltiplo de los 2 argumentos."""
     factores1, factores2 = descompon(numero1), descompon(numero2)
     factores_union = set(factores1) | set(factores2)
     mcm = 1
@@ -72,32 +72,21 @@ def mcm(numero1, numero2):
     return mcm
 
 def mcdN(*numeros):
-    """Devuelve el máximo común divisor de sus argumentos."""
-    
+    """Devuelve el máximo común divisor para un número arbitrario de argumentos."""
     if not numeros:
         return "introduce al menos un argumento"
-    
     numeros = tuple(set(numeros)) # elimino duplicados
-    factores = {}
-    menor_cantidad = {}
-    
     factores = {numero: descompon(numero) for numero in numeros}
-    
     factores_comun = set(factores[numeros[0]])
     for i in range(1, len(numeros)):
-        factores_comun &= set(factores[numeros[i]])
-        
+        factores_comun &= set(factores[numeros[i]])    
+    mcd = 1    
     for factor in factores_comun:
-        menor_cantidad[factor] = min(factores[numero].count(factor) for numero in numeros)
-        
-    mcd = 1
-    for factor in factores_comun:
-        mcd *= factor ** menor_cantidad[factor]
-
+        mcd *= factor ** min(factores[numero].count(factor) for numero in numeros)
     return mcd
 
 def mcmN(*numeros):
-    """Devuelve el máximo común divisor para un número arbitrario de argumentos."""
+    """Devuelve el mínimo común múltiplo para un número arbitrario de argumentos."""
     return mcm
 
 if __name__ == "__main__":

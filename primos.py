@@ -37,7 +37,7 @@ def esPrimo(numero):
 
 def primos(numero):
     """Devuelve una tupla con todos los números primos menores que su argumento."""
-    return tuple(n for n in range(2, numero) if esPrimo(numero))
+    return tuple(n for n in range(2, numero) if esPrimo(n))
 
 def descompon(numero):
     """Devuelve una tupla con la descomposición en factores primos de su argumento."""
@@ -47,14 +47,14 @@ def descompon(numero):
         if numero % i:
             i += 1
         else:
-            numero //= i   ## se usa //= en lugar de /= para assegurarse que la variable es de tipo entero y no se transforma a float, mas eficiente ya que siempre serà un entero
+            numero //= i   ## //= en lugar de /= para assegurar que la variable es de tipo entero y no se transforma a float
             factores.append(i)
     if numero > 1:
         factores.append(numero)
     return tuple(factores)
 
 def mcd(numero1, numero2):
-    """Devuelve el número máximo común divisor de los 2 argumentos."""
+    """Devuelve el número máximo común divisor"""
     factores1, factores2 = descompon(numero1), descompon(numero2)
     factores_comunes = set(factores1) & set(factores2)
     mcd = 1
@@ -63,7 +63,7 @@ def mcd(numero1, numero2):
     return mcd
 
 def mcm(numero1, numero2):
-    """Devuelve el número mínimo común múltiplo de los 2 argumentos."""
+    """Devuelve el número mínimo común múltiplo."""
     factores1, factores2 = descompon(numero1), descompon(numero2)
     factores_union = set(factores1) | set(factores2)
     mcm = 1
@@ -75,8 +75,11 @@ def mcdN(*numeros):
     """Devuelve el máximo común divisor para un número arbitrario de argumentos."""
     if not numeros:
         return "Introduce al menos un argumento"
-    factores = [set(descompon(numero)) for numero in numeros]   # lista de tuplas
-    factores_comun = set.intersection(*factores)  # el asterisco hace que la funcion reciba la lista factores como diferentes argumentos (tuplas)
+    numeros = tuple(set(numeros))   # se eliminan duplicados
+    factores = [descompon(numero) for numero in numeros]
+    factores_comun = set(factores[0])
+    for i in range(1, len(numeros)):
+        factores_comun &= set(factores[i]) 
     mcd = 1
     for factor in factores_comun:
         mcd *= factor ** min(f.count(factor) for f in factores)

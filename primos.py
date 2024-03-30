@@ -87,6 +87,16 @@ def mcdN(*numeros):
 
 def mcmN(*numeros):
     """Devuelve el mínimo común múltiplo para un número arbitrario de argumentos."""
+    if not numeros:
+        return "Introduce al menos un argumento"
+    numeros = tuple(set(numeros))   # se eliminan duplicados
+    factores = [descompon(numero) for numero in numeros]
+    factores_union = set(factores[0])
+    for i in range(1, len(numeros)):
+        factores_union |= set(factores[i]) 
+    mcm = 1
+    for factor in factores_union:
+        mcm *= factor ** max(f.count(factor) for f in factores)
     return mcm
 
 if __name__ == "__main__":

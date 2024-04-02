@@ -27,7 +27,9 @@ Tests unitarios:
 """
 
 def esPrimo(numero):
-    """Determina si un número es primo."""
+    """
+    Determina si un número es primo.
+    """
     if numero < 2:
         return False
     for n in range(2, int(numero**0.5) + 1):
@@ -36,11 +38,15 @@ def esPrimo(numero):
     return True
 
 def primos(numero):
-    """Devuelve una tupla con todos los números primos menores que su argumento."""
+    """
+    Devuelve una tupla con todos los números primos menores que su argumento.
+    """
     return tuple(n for n in range(2, numero) if esPrimo(n))
 
 def descompon(numero):
-    """Devuelve una tupla con la descomposición en factores primos de su argumento."""
+    """
+    Devuelve una tupla con la descomposición en factores primos de su argumento.
+    """
     i = 2
     factores = []
     while i * i <= numero:
@@ -54,7 +60,9 @@ def descompon(numero):
     return tuple(factores)
 
 def mcd(numero1, numero2):
-    """Devuelve el número máximo común divisor"""
+    """
+    Devuelve el número máximo común divisor
+    """
     factores1, factores2 = descompon(numero1), descompon(numero2)
     factores_comunes = set(factores1) & set(factores2)
     mcd = 1
@@ -63,7 +71,9 @@ def mcd(numero1, numero2):
     return mcd
 
 def mcm(numero1, numero2):
-    """Devuelve el número mínimo común múltiplo."""
+    """
+    Devuelve el número mínimo común múltiplo.
+    """
     factores1, factores2 = descompon(numero1), descompon(numero2)
     factores_union = set(factores1) | set(factores2)
     mcm = 1
@@ -72,7 +82,9 @@ def mcm(numero1, numero2):
     return mcm
 
 def mcdN(*numeros):
-    """Devuelve el máximo común divisor para un número arbitrario de argumentos."""
+    """
+    Devuelve el máximo común divisor para un número arbitrario de argumentos.
+    """
     if not numeros:
         return "Introduce al menos un argumento"
     numeros = tuple(set(numeros))   # se eliminan duplicados
@@ -86,7 +98,9 @@ def mcdN(*numeros):
     return mcd
 
 def mcmN(*numeros):
-    """Devuelve el mínimo común múltiplo para un número arbitrario de argumentos."""
+    """
+    Devuelve el mínimo común múltiplo para un número arbitrario de argumentos.
+    """
     if not numeros:
         return "Introduce al menos un argumento"
     numeros = tuple(set(numeros))   # se eliminan duplicados
